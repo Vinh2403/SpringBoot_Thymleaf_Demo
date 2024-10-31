@@ -29,45 +29,47 @@ import vn.iotstar.thymleaf_Task.entity.CategoryEntity;
 import vn.iotstar.thymleaf_Task.models.CategoryModel;
 import vn.iotstar.thymleaf_Task.services.ICategoryService;
 
-@Controller
-@RequestMapping("/admin/categories")
-public class CategoryController {
-
-	@Autowired
-	ICategoryService categoryService;
+	@Controller
+	@RequestMapping("/admin/categories")
+	public class CategoryController {
 	
-
-	
-	@GetMapping("add")
-	public String add(ModelMap model) {
-		CategoryModel cateModel = new CategoryModel();
+		@Autowired
+		ICategoryService categoryService;
 		
-		cateModel.setIsEdit(false);
-		model.addAttribute("category",cateModel);
-		return "admin/categories/addOrEdit";
-	}
+	
+		
+		@GetMapping("add")
+		public String add(ModelMap model) {
+			CategoryModel cateModel = new CategoryModel();
+			
+			cateModel.setIsEdit(false);
+			model.addAttribute("category",cateModel);
+			return "admin/categories/AddOrEdit";
+		}
 	@PostMapping("saveOrUpdate")
 	public ModelAndView saveOrUpdate(ModelMap model,
 			@Valid @ModelAttribute("category") CategoryModel cateModel, BindingResult result) {
 			if(result.hasErrors()) {
-			return new ModelAndView("admin/categories/addOrEdit");
+			return new ModelAndView("admin/categories/AddOrEdit");
 			}
 			CategoryEntity entity = new CategoryEntity();
 			//copy từ Model sang Entity
 			BeanUtils.copyProperties(cateModel, entity);
 			//goi hàm save trong service
 			categoryService.save(entity);
+			
 			//đưa thông báo về cho biến message
 			String message= "";
 			if(cateModel.getIsEdit() == true) {
 			message="Category is Edited! ! ! !!!!! ";
-
 			}else {
 			message="Category is saved! ! ! ! ! !!! ";
+			
 			}
 			model.addAttribute("message",message);
 			//redirect ve URL controller
-			return new ModelAndView("forward:/admin/categories/searchpaging",model);
+			//System.out.print(message);
+			return new ModelAndView("forward:/admin/categories/searchpaginated",model);
 	}
 	@RequestMapping("")
 	public String list(ModelMap model) {
@@ -91,7 +93,7 @@ public class CategoryController {
 	cateModel.setIsEdit(true);
 	//đầy dữ liệu ra view
 	model.addAttribute("category",cateModel);
-	return new ModelAndView("admin/categories/addOrEdit",model); 
+	return new ModelAndView("admin/categories/AddOrEdit",model); 
 	}
 	model.addAttribute("message", "Category is not existed !!!! ");
 	return new ModelAndView("forward:/admin/categories",model);
@@ -147,7 +149,7 @@ public class CategoryController {
 			model.addAttribute("pageNumbers",pageNumbers);
 	}
 	model.addAttribute("categoryPage",resultPage);
-	return "admin/categories/searchpaging";
+	return "admin/categories/searchpaginated";
 	}
 	
 }
