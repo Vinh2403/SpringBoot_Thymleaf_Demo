@@ -7,12 +7,13 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import vn.iotstar.thymleaf_Task.entity.CategoryEntity;
-
+@Service
 public interface ICategoryService {
 
-	List<CategoryEntity> findbyNameContaining(String name);
+	List<CategoryEntity> findByNameContaining(String name);
 
 	Page<CategoryEntity> findByNameContaining(String name, Pageable pageable);
 

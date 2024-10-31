@@ -11,7 +11,7 @@ import vn.iotstar.thymleaf_Task.entity.CategoryEntity;
 
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> {
 			//Tim kiem theo noi dung ten:
-	List<CategoryEntity> findbyNameContaining(String name);
+	List<CategoryEntity> findByNameContaining(String name);
 			//Tim kiem va phan trang:
 	Page<CategoryEntity> findByNameContaining(String name, Pageable pageable);
 }

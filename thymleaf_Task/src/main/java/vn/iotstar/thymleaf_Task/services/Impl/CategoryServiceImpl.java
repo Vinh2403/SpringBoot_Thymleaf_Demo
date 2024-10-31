@@ -8,12 +8,13 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import io.micrometer.common.util.StringUtils;
 import vn.iotstar.thymleaf_Task.entity.CategoryEntity;
 import vn.iotstar.thymleaf_Task.repository.CategoryRepository;
 import vn.iotstar.thymleaf_Task.services.ICategoryService;
-
+@Service
 public class CategoryServiceImpl implements  ICategoryService  {
 	@Autowired
 	CategoryRepository categoryRepository;
@@ -23,8 +24,8 @@ public class CategoryServiceImpl implements  ICategoryService  {
 	}
 
 	@Override
-	public List<CategoryEntity> findbyNameContaining(String name) {
-		return categoryRepository.findbyNameContaining(name);
+	public List<CategoryEntity> findByNameContaining(String name) {
+		return categoryRepository.findByNameContaining(name);
 	}
 
 	@Override

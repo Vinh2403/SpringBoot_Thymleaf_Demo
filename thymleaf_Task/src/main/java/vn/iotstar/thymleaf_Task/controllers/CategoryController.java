@@ -35,8 +35,10 @@ public class CategoryController {
 
 	@Autowired
 	ICategoryService categoryService;
-	@GetMapping("add")
 	
+
+	
+	@GetMapping("add")
 	public String add(ModelMap model) {
 		CategoryModel cateModel = new CategoryModel();
 		
@@ -65,9 +67,9 @@ public class CategoryController {
 			}
 			model.addAttribute("message",message);
 			//redirect ve URL controller
-			return new ModelAndView("forward:/admin/categories/searchpaginated",model);
+			return new ModelAndView("forward:/admin/categories/searchpaging",model);
 	}
-	@RequestMapping()
+	@RequestMapping("")
 	public String list(ModelMap model) {
 	//goi hàm findAll() trong service
 	List<CategoryEntity> list = categoryService.findAll();
@@ -100,7 +102,7 @@ public class CategoryController {
 	{
 		categoryService.deleteById(categoryId);
 		model.addAttribute("message", "Category is deleted!!!");
-		return new ModelAndView("forward:/admin/categories/searchpaginated", model);
+		return new ModelAndView("forward:/admin/categories/searchpaging", model);
 	}
 	
 	
@@ -109,7 +111,7 @@ public class CategoryController {
 	List<CategoryEntity> list = null;
 	//có nội dung truyền về không, name là tùy chon khi required=false
 	if(StringUtils.hasText(name)) {
-	list = categoryService.findbyNameContaining(name);
+	list = categoryService.findByNameContaining(name);
 	}else {
 	list = categoryService.findAll();
 	}
@@ -145,7 +147,7 @@ public class CategoryController {
 			model.addAttribute("pageNumbers",pageNumbers);
 	}
 	model.addAttribute("categoryPage",resultPage);
-	return "admin/categories/searchpaginated";
+	return "admin/categories/searchpaging";
 	}
 	
 }
