@@ -16,7 +16,7 @@ public class CategoryModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	private Long id;
+	private Long categoryID;
 	@NotEmpty(message="Not empty!!!!")
 	private String name;
 	//private String images;

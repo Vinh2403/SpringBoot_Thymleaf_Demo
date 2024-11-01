@@ -85,12 +85,16 @@ import vn.iotstar.thymleaf_Task.services.ICategoryService;
 	public ModelAndView edit(ModelMap model,@PathVariable("categoryId") Long categoryId) {
 	Optional<CategoryEntity> optCategory = categoryService.findById(categoryId);
 	CategoryModel cateModel = new CategoryModel();
+	
 	//kiểm tra sự tồn tại của category
 	if(optCategory.isPresent()) {
 	CategoryEntity entity = optCategory.get();
 	//copy từ entity sang cateModel
 	BeanUtils.copyProperties(entity, cateModel);
 	cateModel.setIsEdit(true);
+/**/
+	 // Kiểm tra giá trị sau khi sao chép
+    System.out.println("CategoryModel ID: " + cateModel.getCategoryID());
 	//đầy dữ liệu ra view
 	model.addAttribute("category",cateModel);
 	return new ModelAndView("admin/categories/AddOrEdit",model); 
@@ -101,10 +105,11 @@ import vn.iotstar.thymleaf_Task.services.ICategoryService;
 	
 	@GetMapping("/delete/{categoryId}")
 	public ModelAndView delete(ModelMap model, @PathVariable("categoryId") Long categoryId)
-	{
+	{	System.out.print("ID cua category can xoa: " + categoryId);
 		categoryService.deleteById(categoryId);
+	
 		model.addAttribute("message", "Category is deleted!!!");
-		return new ModelAndView("forward:/admin/categories/searchpaging", model);
+		return new ModelAndView("forward:/admin/categories/searchpaginated", model);
 	}
 	
 	
