@@ -109,7 +109,7 @@ import vn.iotstar.thymleaf_Task.services.ICategoryService;
 		categoryService.deleteById(categoryId);
 	
 		model.addAttribute("message", "Category is deleted!!!");
-		return new ModelAndView("forward:/admin/categories/searchpaginated", model);
+		return new ModelAndView("forward:/admin/categories", model);
 	}
 	
 	

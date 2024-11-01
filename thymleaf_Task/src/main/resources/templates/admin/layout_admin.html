@@ -2,42 +2,60 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Your Application Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Application Title</title>
 
-	<!-- Thêm liên kết đến Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Thêm liên kết đến Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-	<!-- Thêm liên kết đến Font Awesome -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-		integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM3gZt+3DpxD1GmPfZFE3pSe5t8nYb3z6N4A1" crossorigin="anonymous">
+    <!-- Thêm liên kết đến Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM3gZt+3DpxD1GmPfZFE3pSe5t8nYb3z6N4A1" crossorigin="anonymous">
 
-	<!-- Thêm các tệp CSS khác nếu cần -->
-	<link rel="stylesheet" href="path/to/your/custom.css">
+    <!-- Thêm các tệp CSS khác nếu cần -->
+    <link rel="stylesheet" href="path/to/your/custom.css">
+
+    <!-- Thêm jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Thêm Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
+    <header class="row">
+        <div class="col">
+            <div th:replace="~{admin/fragments/header :: header}"></div>
+        </div>
+    </header>
+    <main class="container">
+        <section class="row mt-4">
+            <div class="col mt-5 mb-5">
+                <div layout:fragment="content"></div>
+            </div>
+        </section>
+    </main>
+    <footer class="row">
+        <div class="col">
+            <div th:replace="~{admin/fragments/footer :: footer}"></div>
+        </div>
+    </footer>
 
-	<header class="row">
-		<div class="col">
-			<div th:replace="~{admin/fragments/header :: header}"></div>
-		</div>
-	</header>
-	<main class="container">
-		<!-- <nav class ="row">
-<div class="col">
-<div th:replace="~{admin/fragments/nav::nav}"></div>
-</div>
-</nav> -->
-		<section class="row mt-4">
-			<div class="col mt-5 mb-5">
-				<div layout:fragment="content"></div>
-			</div>
-		</section>
-	</main>
-	<footer class="row">
-		<div class="col">
-			<div th:replace="~{admin/fragments/footer :: footer}"></div>
-		</div>
-	</footer>
+    <!-- Đưa mã JavaScript ở đây -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            console.log('jQuery is ready to use');
+            $('body').css('background-color', 'lightblue'); // Thay đổi màu nền
+        });
+
+        function showconfirmation(id, name) {
+            console.log('ID:', id, 'Name:', name); // Kiểm tra xem hàm có được gọi không
+            $('#productName').text(name);
+            $('#yesOption').attr('href', '/admin/categories/delete/' + id);
+            $('#confirmationId').modal('show');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,6 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/layout_admin.html}">
+     
 <section class="row" layout:fragment="content">
     <div class="col mt-4">
         <div class="card">
@@ -51,18 +52,25 @@
                                    class="btn btn-outline-warning"><i class="fas fa-edit"></i>EDIT</a>
                                 <a th:data-id="${category.categoryID}" th:data-name="${category.name}"
                                    onclick="showconfirmation(this.getAttribute('data-id'), this.getAttribute('data-name'))"
-                                   class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+                                   class="btn btn-outline-danger"><i class="fa fa-trash"></i>DELETE</a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <script type="text/javascript">
-                    function showconfirmation(id, name) {
-                        $('#productName').text(name);
-                        $('#yesOption').attr('href', '/admin/categories/delete/' + id);
-                        $('#confirmationId').modal('show');
-                    }
-                </script>
+    $(document).ready(function() {
+        console.log('jQuery is ready to use');
+        $('body').css('background-color', 'lightblue'); // Thay đổi màu nền
+    });
+
+    // Định nghĩa hàm showconfirmation ở đây
+    function showconfirmation(id, name) {
+        console.log('ID:', id, 'Name:', name); // Kiểm tra xem hàm có được gọi không
+        $('#productName').text(name);
+        $('#yesOption').attr('href', '/admin/categories/delete/' + id);
+        $('#confirmationId').modal('show');
+    }
+</script>
                 <!-- Modal -->
                 <div class="modal fade" id="confirmationId" tabindex="-1" aria-labelledby="confirmationLabel" aria-hidden="true">
                     <div class="modal-dialog">
