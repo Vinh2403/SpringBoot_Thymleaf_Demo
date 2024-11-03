@@ -24,6 +24,14 @@
 </head>
 
 <body>
+	<a th:href="@{'/admin/categories'}"
+	   style="background-color: blue; color: white; float: right;"
+	   class="btn">
+	   	<i class="fa fa-trash"></i>Show Categories</a>
+	   	<span
+		th:text="#{iotstar.message.hello}"></span>
+		<a href="?language=en">English</a>|
+		<a href="?language=vi">Viet Nam</a>|
     <header class="row">
         <div class="col">
             <div th:replace="~{admin/fragments/header :: header}"></div>
